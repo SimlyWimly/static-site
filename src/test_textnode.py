@@ -1,28 +1,18 @@
 import unittest
 
-from textnode import TextNode
+from textnode import TextNode, text_node_to_html_node
+from htmlnode import LeafNode
 
 class TestTextNode(unittest.TestCase):
-    def test_eq_pass(self):
-        node = TextNode("This is a text node", "bold", "https://www.boot.dev")
-        node2 = TextNode("This is a text node", "bold", "https://www.boot.dev")
+    def test_text_node_to_html_node(self):
+        node = text_node_to_html_node(TextNode("I am a text", "text"))
+        node2 = LeafNode(None, "I am a text")
         self.assertEqual(node, node2)
 
-    def test_eq_pass2(self):
-        node = TextNode("This is a text node", "bold", None)
-        node2 = TextNode("This is a text node", "bold", None)
-        self.assertEqual(node, node2)    
-
-    def test_eq_false(self):
-        node = TextNode("This is a text node 1", "bold", "https://www.boot.dev")
-        node2 = TextNode("This is a text node 2", "bold", "https://www.boot.dev")
+    def test_bold_text_node_to_bold_html_node(self):
+        node = text_node_to_html_node(TextNode("I am a bold text", "bold"))
+        node2 = LeafNode("b", "I am a bold text")
         self.assertEqual(node, node2)
-
-    def test_eq_false2(self):
-        node = TextNode("Test Node", "bold", "https://www.boot.dev")
-        node2 = TextNode("Test Node", "italic", "https://www.boot.dev")
-        self.assertEqual(node, node2)
-
 
 if __name__ == "__main__":
     unittest.main()
